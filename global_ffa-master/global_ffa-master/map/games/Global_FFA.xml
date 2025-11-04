@@ -3536,10 +3536,7 @@
       <territoryOwner territory="Smolensk" owner="Neutral_True"/>
       <territoryOwner territory="Samara" owner="Neutral_True"/>
       <territoryOwner territory="British Somaliland" owner="Neutral_True"/>
-      <territoryOwner territory="40 Sea Zone" owner="Neutral_True"/>
-      <territoryOwner territory="84 Sea Zone" owner="Neutral_True"/>
-      <territoryOwner territory="107 Sea Zone" owner="Neutral_True"/>
-      <territoryOwner territory="23 Sea Zone" owner="Neutral_True"/>
+
     </ownerInitialize>
     <unitInitialize>
       <!-- Neutrals -->
