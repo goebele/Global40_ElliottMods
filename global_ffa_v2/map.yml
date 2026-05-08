@@ -1,0 +1,3 @@
+map_name: global_ffa_v2
+games:
+- {game_name: Global FFA V2, file_name: Global_FFA_V2.xml}
