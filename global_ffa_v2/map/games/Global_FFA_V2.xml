@@ -1235,7 +1235,9 @@
     <unit name="cruiser"/>
     <unit name="rocket_site"/>
     <unit name="carrier"/>
+    <unit name="super_carrier"/>
     <unit name="battleship"/>
+    <unit name="battlecruiser"/>
     <unit name="aaGun"/>
     <unit name="airfield"/>
     <unit name="harbour"/>
@@ -1413,7 +1415,7 @@
       <result resourceOrUnit="infantry" quantity="1"/>
     </productionRule>
     <productionRule name="buyBunker">
-      <cost resource="PUs" quantity="3"/>
+      <cost resource="PUs" quantity="10"/>
       <result resourceOrUnit="bunker" quantity="1"/>
     </productionRule>
     <productionRule name="buyMech_Infantry">
@@ -1452,6 +1454,10 @@
       <cost resource="PUs" quantity="16"/>
       <result resourceOrUnit="carrier" quantity="1"/>
     </productionRule>
+    <productionRule name="buySuper_Carrier">
+      <cost resource="PUs" quantity="24"/>
+      <result resourceOrUnit="super_carrier" quantity="1"/>
+    </productionRule>
     <productionRule name="buyDestroyer">
       <cost resource="PUs" quantity="8"/>
       <result resourceOrUnit="destroyer" quantity="1"/>
@@ -1463,6 +1469,10 @@
     <productionRule name="buyBattleship">
       <cost resource="PUs" quantity="18"/>
       <result resourceOrUnit="battleship" quantity="1"/>
+    </productionRule>
+    <productionRule name="buyBattlecruiser">
+      <cost resource="PUs" quantity="15"/>
+      <result resourceOrUnit="battlecruiser" quantity="1"/>
     </productionRule>
     <productionRule name="buySubmarine">
       <cost resource="PUs" quantity="6"/>
@@ -1592,6 +1602,10 @@
       <cost resource="PUs" quantity="12"/>
       <result resourceOrUnit="carrier" quantity="1"/>
     </productionRule>
+    <productionRule name="buySuper_CarrierShipyards">
+      <cost resource="PUs" quantity="20"/>
+      <result resourceOrUnit="super_carrier" quantity="1"/>
+    </productionRule>
     <productionRule name="buyDestroyerShipyards">
       <cost resource="PUs" quantity="6"/>
       <result resourceOrUnit="destroyer" quantity="1"/>
@@ -1599,6 +1613,10 @@
     <productionRule name="buyCruiserShipyards">
       <cost resource="PUs" quantity="8"/>
       <result resourceOrUnit="cruiser" quantity="1"/>
+    </productionRule>
+        <productionRule name="buyBattleCruiserShipyards">
+      <cost resource="PUs" quantity="12"/>
+      <result resourceOrUnit="battlecruiser" quantity="1"/>
     </productionRule>
     <productionRule name="buyBattleshipShipyards">
       <cost resource="PUs" quantity="16"/>
@@ -1680,8 +1698,10 @@
       <frontierRules name="buyTransport"/>
       <frontierRules name="buySubmarine"/>
       <frontierRules name="buyCarrier"/>
+      <frontierRules name="buySuper_Carrier"/>
       <frontierRules name="buyDestroyer"/>
       <frontierRules name="buyCruiser"/>
+      <frontierRules name="buyBattlecruiser"/>
       <frontierRules name="buyBattleship"/>
       <frontierRules name="buyAAGun"/>
       <frontierRules name="buyFactory_Minor"/>
@@ -1694,9 +1714,11 @@
     <productionFrontier name="productionChinese_Burma_Road_Open">
       <frontierRules name="buyInfantry"/>
       <frontierRules name="buyArtillery"/>
+      <frontierRules name="buySuper_Carrier"/>
     </productionFrontier>
     <productionFrontier name="productionChinese_Burma_Road_Closed">
       <frontierRules name="buyInfantry"/>
+      <frontierRules name="buySuper_Carrier"/>
     </productionFrontier>
     <!--<productionFrontier name="productionIndustrialTechnology">
                         <frontierRules name="buyInfantryIndustrialTechnology"/>
@@ -1722,6 +1744,7 @@
       <frontierRules name="buyTransportShipyards"/>
       <frontierRules name="buySubmarineShipyards"/>
       <frontierRules name="buyCarrierShipyards"/>
+      <frontierRules name="buySuper_CarrierShipyards"/>
       <frontierRules name="buyDestroyerShipyards"/>
       <frontierRules name="buyCruiserShipyards"/>
       <frontierRules name="buyBattleshipShipyards"/>
@@ -2234,10 +2257,21 @@
       <option name="hitPoints" value="2"/>
       <option name="blockade" value="1"/>
       <option name="canBeGivenByTerritoryTo" value="British"/>
+    </attachment>    
+    <attachment name="unitAttachment" attachTo="battlecruiser" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+      <option name="movement" value="3"/>
+      <option name="isSea" value="true"/>
+      <option name="attack" value="3"/>
+      <option name="defense" value="4"/>
+      <option name="canBombard" value="true"/>
+      <option name="transportCapacity" value="4"/>
+      <option name="isCombatTransport" value="true"/>
+      <option name="blockade" value="3"/>
+      <option name="canBeGivenByTerritoryTo" value="British"/>
     </attachment>
     <!-- Cruiser -->
     <attachment name="unitAttachment" attachTo="cruiser" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
-      <option name="movement" value="2"/>
+      <option name="movement" value="3"/>
       <option name="isSea" value="true"/>
       <option name="attack" value="3"/>
       <option name="defense" value="3"/>
@@ -2272,6 +2306,19 @@
       <option name="whenCombatDamaged" value="unitsMayNotLeaveAlliedCarrier" count="1:2"/>
       <option name="canBeGivenByTerritoryTo" value="British"/>
     </attachment>
+    <!-- Super Carrier -->
+    <attachment name="unitAttachment" attachTo="super_carrier" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+      <option name="movement" value="2"/>
+      <option name="isSea" value="true"/>
+      <option name="attack" value="1"/>
+      <option name="defense" value="2"/>
+      <option name="carrierCapacity" value="5"/>
+      <option name="hitPoints" value="2"/>
+      <option name="blockade" value="0"/>
+      <option name="whenCombatDamaged" value="unitsMayNotLandOnCarrier" count="1:2"/>
+      <option name="whenCombatDamaged" value="unitsMayNotLeaveAlliedCarrier" count="1:2"/>
+      <option name="canBeGivenByTerritoryTo" value="British"/>
+    </attachment>
     <!-- Submarine -->
     <attachment name="unitAttachment" attachTo="submarine" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
       <option name="movement" value="2"/>
@@ -2283,7 +2330,7 @@
       <!-- stuff for targeting unescorted transports (we are using the new-fangled aa-gun code)
 						 <option name="isAAforFlyOverOnly" value="true"/>
 						 <option name="targetsAA" value="transport"/>
-						 <option name="willNotFireIfPresent" value="destroyer:cruiser:battleship:carrier"/>
+            <option name="willNotFireIfPresent" value="destroyer:cruiser:battleship:carrier:super_carrier"/>
 						 <option name="mayOverStackAA" value="true"/>
 						 <option name="maxAAattacks" value="1"/>
 						 <option name="attackAA" value="2"/>
@@ -2312,8 +2359,8 @@
       <option name="maxOperationalDamage" value="10"/>
       <option name="isConstruction" value="true"/>
       <option name='constructionType' value='bunker'/>
-	    <option name='constructionsPerTerrPerTypePerTurn' value='999'/>
-	    <option name='maxConstructionsPerTypePerTerr' value='999'/>
+	    <option name='constructionsPerTerrPerTypePerTurn' value='1'/>
+	    <option name='maxConstructionsPerTypePerTerr' value='5'/>
     </attachment>
     <!-- Factory Major -->
     <attachment name="unitAttachment" attachTo="factory_major" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -2359,7 +2406,6 @@
       <!--<option name="canBeGivenByTerritoryTo" value="British"/>-->
     </attachment>
     <attachment name="unitAttachment" attachTo="rocket_site" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
-      <option name="isInfrastructure" value="true"/>
       <option name="canBeDamaged" value="true"/>
       <option name="maxDamage" value="10"/>
       <option name="maxOperationalDamage" value="2"/>
@@ -2378,7 +2424,7 @@
       <option name="canBeDamaged" value="true"/>
       <option name="maxDamage" value="6"/>
       <option name="maxOperationalDamage" value="2"/>
-      <option name="repairsUnits" value="battleship:carrier"/>
+      <option name="repairsUnits" value="battleship:carrier:super_carrier"/>
       <option name="isConstruction" value="true"/>
       <option name="constructionType" value="harbour_structure"/>
       <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
@@ -2389,6 +2435,7 @@
       <option name="givesMovement" value="1:destroyer"/>
       <option name="givesMovement" value="1:cruiser"/>
       <option name="givesMovement" value="1:carrier"/>
+      <option name="givesMovement" value="1:super_carrier"/>
       <option name="givesMovement" value="1:battleship"/>
       <option name="isAAforBombingThisUnitOnly" value="true"/>
       <!--<option name="canBeGivenByTerritoryTo" value="British"/>-->
@@ -3022,7 +3069,7 @@
       <option name="production" value="6"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Afghanistan" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
-      <option name="production" value="3"/>
+      <option name="production" value="20"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Sierra Leone" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
@@ -3034,7 +3081,7 @@
       <option name="production" value="3"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Saudi Arabia" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
-      <option name="production" value="10"/>
+      <option name="production" value="20"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Paraguay" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="6"/>
@@ -3065,10 +3112,10 @@
       <option name="production" value="3"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Iraq" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
-      <option name="production" value="10"/>
+      <option name="production" value="20"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Eastern Persia" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
-      <option name="production" value="10"/>
+      <option name="production" value="20"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Uruguay" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="6"/>
@@ -3080,10 +3127,10 @@
       <option name="production" value="6"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Northwest Persia" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
-      <option name="production" value="10"/>
+      <option name="production" value="20"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Persia" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
-      <option name="production" value="10"/>
+      <option name="production" value="20"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Sweden" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
@@ -3120,32 +3167,32 @@
     </attachment>
 
     <!-- Capitols -->
-    <attachment name="territoryAttachment" attachTo="Novgorod" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+    <attachment name="territoryAttachment" attachTo="Tambov" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
       <option name="capital" value="Russians"/>
       <option name="victoryCity" value="true"/>
     </attachment>
-    <attachment name="territoryAttachment" attachTo="Amur" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+    <attachment name="territoryAttachment" attachTo="Central Mongolia" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
       <option name="capital" value="Japanese"/>
       <option name="victoryCity" value="true"/>
     </attachment>
-    <attachment name="territoryAttachment" attachTo="Malaya" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+    <attachment name="territoryAttachment" attachTo="Yunnan" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
       <option name="capital" value="ANZAC"/>
       <option name="victoryCity" value="true"/>
     </attachment>
-    <attachment name="territoryAttachment" attachTo="Liberia" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+    <attachment name="territoryAttachment" attachTo="French Central Africa" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
       <option name="capital" value="Americans"/>
       <option name="victoryCity" value="true"/>
     </attachment>
-    <attachment name="territoryAttachment" attachTo="Union of South Africa" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+    <attachment name="territoryAttachment" attachTo="Tunisia" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
       <option name="capital" value="British"/>
       <option name="victoryCity" value="true"/>
     </attachment>
-    <attachment name="territoryAttachment" attachTo="Northern Italy" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+    <attachment name="territoryAttachment" attachTo="Greater Southern Germany" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="3"/>
       <option name="capital" value="French"/>
       <option name="victoryCity" value="true"/>
@@ -3340,7 +3387,7 @@
     </attachment>
     <!-- Advanced Artillery (improvedArtillerySupport) is handled via Support Attachments -->
     <attachment name="techAbilityAttachment" attachTo="rocket" javaClass="games.strategy.triplea.attachments.TechAbilityAttachment" type="technology">
-      <option name="rocketDiceNumber" value="1:airfield"/>
+      <option name="rocketDiceNumber" value="1:rocket_site"/>
       <option name="rocketDistance" value="4"/>
       <option name="rocketNumberPerTerritory" value="200"/>
     </attachment>
@@ -3388,7 +3435,7 @@
       <territoryOwner territory="Manchuria" owner="Neutral_True"/>
       <territoryOwner territory="Hainan" owner="Neutral_True"/>
       <territoryOwner territory="Shensi" owner="Neutral_True"/>
-      <territoryOwner territory="Yunnan" owner="Neutral_True"/>
+      <territoryOwner territory="Yunnan" owner="ANZAC"/>
       <territoryOwner territory="Suiyuyan" owner="Neutral_True"/>
       <territoryOwner territory="Kweichow" owner="Neutral_True"/>
       <territoryOwner territory="Hunan" owner="Neutral_True"/>
@@ -3409,7 +3456,7 @@
       <territoryOwner territory="Burma" owner="Neutral_True"/>
       <territoryOwner territory="British Columbia" owner="Neutral_True"/>
       <territoryOwner territory="India" owner="Neutral_True"/>
-      <territoryOwner territory="Malaya" owner="ANZAC"/>
+      <territoryOwner territory="Malaya" owner="Neutral_True"/>
       <territoryOwner territory="Borneo" owner="Neutral_True"/>
       <!--<territoryOwner territory="Yukon Territory" owner="British"/>-->
       <territoryOwner territory="Kwangtung" owner="Neutral_True"/>
@@ -3439,7 +3486,7 @@
       <territoryOwner territory="Evenkiyskiy" owner="Neutral_True"/>
       <territoryOwner territory="Yenisey" owner="Neutral_True"/>
       <territoryOwner territory="Soviet Far East" owner="Neutral_True"/>
-      <territoryOwner territory="Amur" owner="Japanese"/>
+      <territoryOwner territory="Amur" owner="Neutral_True"/>
       <territoryOwner territory="Yakut S.S.R." owner="Neutral_True"/>
       <territoryOwner territory="Timguska" owner="Neutral_True"/>
       <territoryOwner territory="Siberia" owner="Neutral_True"/>
@@ -3454,7 +3501,7 @@
       <territoryOwner territory="Olgiy" owner="Neutral_True"/>
       <territoryOwner territory="Dzavhan" owner="Neutral_True"/>
       <territoryOwner territory="Tsagaan Olom" owner="Neutral_True"/>
-      <territoryOwner territory="Central Mongolia" owner="Neutral_True"/>
+      <territoryOwner territory="Central Mongolia" owner="Japanese"/>
       <territoryOwner territory="Buyant-Uhaa" owner="Neutral_True"/>
       <territoryOwner territory="Ulaanbaatar" owner="Neutral_True"/>
       <!-- E40 -->
@@ -3482,7 +3529,7 @@
       <territoryOwner territory="Rio de Oro" owner="Neutral_True"/>
       <territoryOwner territory="Portuguese Guinea" owner="Neutral_True"/>
       <territoryOwner territory="Sierra Leone" owner="Neutral_True"/>
-      <territoryOwner territory="Liberia" owner="Americans"/>
+      <territoryOwner territory="Liberia" owner="Neutral_True"/>
       <territoryOwner territory="Mozambique" owner="Neutral_True"/>
       <territoryOwner territory="Angola" owner="Neutral_True"/>
       <territoryOwner territory="Afghanistan" owner="Neutral_True"/>
@@ -3509,7 +3556,7 @@
       <territoryOwner territory="Gibraltar" owner="Neutral_True"/>
       <territoryOwner territory="New Brunswick Nova Scotia" owner="Neutral_True"/>
       <territoryOwner territory="Egypt" owner="Neutral_True"/>
-      <territoryOwner territory="Union of South Africa" owner="British"/>
+      <territoryOwner territory="Union of South Africa" owner="Neutral_True"/>
       <territoryOwner territory="Cyprus" owner="Neutral_True"/>
       <territoryOwner territory="British Guiana" owner="Neutral_True"/>
       <territoryOwner territory="Gold Coast" owner="Neutral_True"/>
@@ -3527,7 +3574,7 @@
       <territoryOwner territory="Morocco" owner="Neutral_True"/>
       <territoryOwner territory="French Equatorial Africa" owner="Neutral_True"/>
       <territoryOwner territory="Normandy Bordeaux" owner="Neutral_True"/>
-      <territoryOwner territory="French Central Africa" owner="Neutral_True"/>
+      <territoryOwner territory="French Central Africa" owner="Americans"/>
       <territoryOwner territory="French Madagascar" owner="Neutral_True"/>
       <territoryOwner territory="French Guiana" owner="Neutral_True"/>
       <territoryOwner territory="Algeria" owner="Neutral_True"/>
@@ -3535,8 +3582,8 @@
       <territoryOwner territory="Syria" owner="Neutral_True"/>
       <territoryOwner territory="French West Africa" owner="Neutral_True"/>
       <territoryOwner territory="France" owner="Neutral_True"/>
-      <territoryOwner territory="Tunisia" owner="Neutral_True"/>
-      <territoryOwner territory="Greater Southern Germany" owner="Neutral_True"/>
+      <territoryOwner territory="Tunisia" owner="British"/>
+      <territoryOwner territory="Greater Southern Germany" owner="French"/>
       <territoryOwner territory="Slovakia Hungary" owner="Neutral_True"/>
       <territoryOwner territory="Western Germany" owner="Neutral_True"/>
       <territoryOwner territory="Romania" owner="Neutral_True"/>
@@ -3547,7 +3594,7 @@
       <territoryOwner territory="Holland Belgium" owner="Neutral_True"/>
       <territoryOwner territory="Tobruk" owner="Neutral_True"/>
       <territoryOwner territory="Albania" owner="Neutral_True"/>
-      <territoryOwner territory="Northern Italy" owner="French"/>
+      <territoryOwner territory="Northern Italy" owner="Neutral_True"/>
       <territoryOwner territory="Libya" owner="Neutral_True"/>
       <territoryOwner territory="Sicily" owner="Neutral_True"/>
       <territoryOwner territory="Italian Somaliland" owner="Neutral_True"/>
@@ -3566,14 +3613,14 @@
       <territoryOwner territory="Eastern Poland" owner="Neutral_True"/>
       <territoryOwner territory="Bessarabia" owner="Neutral_True"/>
       <territoryOwner territory="Russia" owner="Neutral_True"/>
-      <territoryOwner territory="Tambov" owner="Neutral_True"/>
+      <territoryOwner territory="Tambov" owner="Russians"/>
       <territoryOwner territory="Ukraine" owner="Neutral_True"/>
       <territoryOwner territory="Western Ukraine" owner="Neutral_True"/>
       <territoryOwner territory="Novosibirsk" owner="Neutral_True"/>
       <territoryOwner territory="Vologda" owner="Neutral_True"/>
       <territoryOwner territory="Volgograd" owner="Neutral_True"/>
       <territoryOwner territory="Turkmenistan" owner="Neutral_True"/>
-      <territoryOwner territory="Novgorod" owner="Russians"/>
+      <territoryOwner territory="Novgorod" owner="Neutral_True"/>
       <territoryOwner territory="Caucasus" owner="Neutral_True"/>
       <territoryOwner territory="Smolensk" owner="Neutral_True"/>
       <territoryOwner territory="Samara" owner="Neutral_True"/>
@@ -3583,32 +3630,51 @@
     <unitInitialize>
       <!-- Neutrals -->
 
-      <unitPlacement unitType="infantry" territory="Malaya" quantity="5" owner="ANZAC"/>
-      <unitPlacement unitType="factory_major" territory="Malaya" quantity="1" owner="ANZAC"/>
-      <unitPlacement unitType="armour" territory="Malaya" quantity="1" owner="ANZAC"/>
+      <unitPlacement unitType="infantry" territory="Yunnan" quantity="5" owner="ANZAC"/>
+      <unitPlacement unitType="factory_major" territory="Yunnan" quantity="1" owner="ANZAC"/>
+      <unitPlacement unitType="armour" territory="Yunnan" quantity="1" owner="ANZAC"/>
+      <unitPlacement unitType="bunker" territory="Yunnan" quantity="3" owner="ANZAC"/>
+      <unitPlacement unitType="aaGun" territory="Yunnan" quantity="2" owner="ANZAC"/>
 
 
 
-      <unitPlacement unitType="infantry" territory="Novgorod" quantity="5" owner="Russians"/>
-      <unitPlacement unitType="factory_major" territory="Novgorod" quantity="1" owner="Russians"/>
-      <unitPlacement unitType="armour" territory="Novgorod" quantity="2" owner="Russians"/>
+      <unitPlacement unitType="infantry" territory="Tambov" quantity="5" owner="Russians"/>
+      <unitPlacement unitType="factory_major" territory="Tambov" quantity="1" owner="Russians"/>
+      <unitPlacement unitType="armour" territory="Tambov" quantity="2" owner="Russians"/>
+      <unitPlacement unitType="bunker" territory="Tambov" quantity="3" owner="Russians"/>
+      <unitPlacement unitType="aaGun" territory="Tambov" quantity="2" owner="Russians"/>
 
-      <unitPlacement unitType="infantry" territory="Northern Italy" quantity="5" owner="French"/>
-      <unitPlacement unitType="factory_major" territory="Northern Italy" quantity="1" owner="French"/>
-      <unitPlacement unitType="armour" territory="Northern Italy" quantity="2" owner="French"/>
+      <unitPlacement unitType="infantry" territory="Greater Southern Germany" quantity="5" owner="French"/>
+      <unitPlacement unitType="factory_major" territory="Greater Southern Germany" quantity="1" owner="French"/>
+      <unitPlacement unitType="armour" territory="Greater Southern Germany" quantity="2" owner="French"/>
+      <unitPlacement unitType="bunker" territory="Greater Southern Germany" quantity="3" owner="French"/>
+      <unitPlacement unitType="aaGun" territory="Greater Southern Germany" quantity="2" owner="French"/>
 
-      <unitPlacement unitType="infantry" territory="Amur" quantity="5" owner="Japanese"/>
-      <unitPlacement unitType="factory_major" territory="Amur" quantity="1" owner="Japanese"/>
-      <unitPlacement unitType="armour" territory="Amur" quantity="2" owner="Japanese"/>
+      <unitPlacement unitType="infantry" territory="Central Mongolia" quantity="5" owner="Japanese"/>
+      <unitPlacement unitType="factory_major" territory="Central Mongolia" quantity="1" owner="Japanese"/>
+      <unitPlacement unitType="armour" territory="Central Mongolia" quantity="2" owner="Japanese"/>
+      <unitPlacement unitType="bunker" territory="Central Mongolia" quantity="3" owner="Japanese"/>
+      <unitPlacement unitType="aaGun" territory="Central Mongolia" quantity="2" owner="Japanese"/>
 
-      <unitPlacement unitType="infantry" territory="Union of South Africa" quantity="5" owner="British"/>
-      <unitPlacement unitType="factory_major" territory="Union of South Africa" quantity="1" owner="British"/>
-      <unitPlacement unitType="armour" territory="Union of South Africa" quantity="2" owner="British"/>
+      <unitPlacement unitType="infantry" territory="Tunisia" quantity="5" owner="British"/>
+      <unitPlacement unitType="factory_major" territory="Tunisia" quantity="1" owner="British"/>
+      <unitPlacement unitType="armour" territory="Tunisia" quantity="2" owner="British"/>
+      <unitPlacement unitType="bunker" territory="Tunisia" quantity="3" owner="British"/>
+      <unitPlacement unitType="aaGun" territory="Tunisia" quantity="2" owner="British"/>
 
 
-      <unitPlacement unitType="infantry" territory="Liberia" quantity="5" owner="Americans"/>
-      <unitPlacement unitType="factory_major" territory="Liberia" quantity="1" owner="Americans"/>
-      <unitPlacement unitType="armour" territory="Liberia" quantity="2" owner="Americans"/>
+      <unitPlacement unitType="infantry" territory="French Central Africa" quantity="5" owner="Americans"/>
+      <unitPlacement unitType="factory_major" territory="French Central Africa" quantity="1" owner="Americans"/>
+      <unitPlacement unitType="armour" territory="French Central Africa" quantity="2" owner="Americans"/>
+      <unitPlacement unitType="bunker" territory="French Central Africa" quantity="3" owner="Americans"/>
+      <unitPlacement unitType="aaGun" territory="French Central Africa" quantity="2" owner="Americans"/>
+
+      <unitPlacement unitType="factory_minor" territory="Afghanistan" quantity="1" owner="Neutral_True"/>
+      <unitPlacement unitType="factory_minor" territory="Saudi Arabia" quantity="1" owner="Neutral_True"/>
+      <unitPlacement unitType="factory_minor" territory="Iraq" quantity="1" owner="Neutral_True"/>
+      <unitPlacement unitType="factory_minor" territory="Eastern Persia" quantity="1" owner="Neutral_True"/>
+      <unitPlacement unitType="factory_minor" territory="Northwest Persia" quantity="1" owner="Neutral_True"/>
+      <unitPlacement unitType="factory_minor" territory="Persia" quantity="1" owner="Neutral_True"/>
       
 
 
@@ -3631,15 +3697,15 @@
      
     </unitInitialize>
     <resourceInitialize>
-      <resourceGiven player="Germans" resource="PUs" quantity="50"/>
-      <resourceGiven player="Russians" resource="PUs" quantity="50"/>
-      <resourceGiven player="Japanese" resource="PUs" quantity="50"/>
-      <resourceGiven player="British" resource="PUs" quantity="50"/>
-      <resourceGiven player="ANZAC" resource="PUs" quantity="50"/>
-      <resourceGiven player="Italians" resource="PUs" quantity="50"/>
-      <resourceGiven player="Americans" resource="PUs" quantity="50"/>
-      <resourceGiven player="French" resource="PUs" quantity="50"/>
-      <resourceGiven player="Dutch" resource="PUs" quantity="50"/>
+      <resourceGiven player="Germans" resource="PUs" quantity="100"/>
+      <resourceGiven player="Russians" resource="PUs" quantity="100"/>
+      <resourceGiven player="Japanese" resource="PUs" quantity="100"/>
+      <resourceGiven player="British" resource="PUs" quantity="100"/>
+      <resourceGiven player="ANZAC" resource="PUs" quantity="100"/>
+      <resourceGiven player="Italians" resource="PUs" quantity="100"/>
+      <resourceGiven player="Americans" resource="PUs" quantity="100"/>
+      <resourceGiven player="French" resource="PUs" quantity="100"/>
+      <resourceGiven player="Dutch" resource="PUs" quantity="100"/>
     </resourceInitialize>
      </initialize>
   <propertyList>
